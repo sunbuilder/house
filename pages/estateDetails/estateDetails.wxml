@@ -1,0 +1,514 @@
+<scroll-view scroll-y="{{modalName==null}}" class="page {{modalName!=null?'show':''}}">
+  <cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+    <view slot="backText">返回</view>
+    <view slot="content">{{title}}</view>
+  </cu-custom>
+  <!-- 轮播 -->
+<swiper class="screen-swiper {{DotStyle?'square-dot':'round-dot'}}" interval="5000" duration="500">
+  <swiper-item wx:for="{{swiperList}}" wx:key>
+    <image src="{{item.url}}"></image>
+  </swiper-item>
+</swiper>
+<!-- 1 -->
+  <view class="cu-bar bg-white solid-bottom margin-top">
+    <view class="action">
+    <!-- 临水家园 -->
+      <text class="cuIcon-title text-orange "></text>{{buildingVo.buildingBaseInfo.buildingName}}
+    </view>
+    <view class="action">
+      <image src="../../image/shou.png" class="action-image" catchtap='handleCollection' wx:if="{{!isCollected}}"  data-target="menuModal"/>
+      <image catchtap='handleCollection' wx:if="{{isCollected}}" class="action-image"src="../../image/shou1.png"/>
+    </view>
+  </view>
+<!-- 2 -->
+  <view class="cu-list menu {{menuBorder?'sm-border':''}} {{menuCard?'card-menu margin-top':''}}">
+  <!-- 2.1 -->
+   <!-- <view class="cu-item {{menuArrow?'':'arrow'}}" bindtap='calculator'>
+        <view class="content">
+          <text class="cuIcon-warn text-green"></text>
+          <text class="text-grey">均价11200元/m^2</text>
+        </view>
+        <view class="action">
+            <text class="text-grey text-sm">房贷计算器</text>
+        </view>
+    </view> -->
+    <!-- 2.2 -->
+    <view class="cu-item {{menuArrow?'arrow':''}}">
+      <view class="content">
+        <text class="cuIcon-tagfill text-red"></text>
+        <text class="text-grey">{{buildingVo.buildingBaseInfo.isSale}}</text>
+      </view>
+      <view class="action" wx:for="{{buildingCharacter}}">
+        <view class="cu-tag round bg-orange light">{{item}}</view>
+        <!-- <view class="cu-tag round bg-olive light">住宅</view>
+        <view class="cu-tag round bg-blue light">毛坯</view> -->
+      </view>
+    </view>
+    <!-- 2.3 -->
+    <!-- <view class="cu-item {{menuArrow?'':'arrow'}}" bindtap='map'> -->
+    <view class="cu-item {{menuArrow?'':'arrow'}}" bindtap='tomap'>
+      <view class="content">
+         <text class="cuIcon-btn text-olive"></text>
+        <text class="text-grey">{{buildingVo.buildingBaseInfo.buildingProvince}}</text>
+      </view>
+      <view class="action">
+        <text class="text-grey text-sm">{{distance}}km</text>
+      </view>
+    </view>
+    <view class="cu-item {{menuArrow?'':'arrow'}}">
+      <view class="content">
+         <text class="cuIcon-discoverfill text-orange"></text>
+        <text class="text-grey">{{buildingVo.buildingBaseInfo.buildingAddress}}</text>
+      </view>
+    </view>
+    <!-- 2.4 -->
+<view class="padding-xl">
+  <button class="cu-btn block line-orange lg" bindtap='parameter'>
+    <text class="cuIcon-upload"></text> 楼房参数</button>
+</view>
+<!-- 2.5 -->
+<view class="cu-item {{menuArrow?'arrow':''}}">
+      <view class="content">
+        <text class="cuIcon-circlefill text-grey"></text>
+        <text class="text-grey">入驻楼盘</text>
+      </view>
+      <view class="content" bindtap='error'>
+        <text class="cuIcon-circlefill text-grey"></text>
+        <text class="text-grey">楼盘纠错</text>
+      </view>
+    </view>
+<!-- 2.6 -->
+<view class="solid-bottom margin-top cu-item {{menuArrow?'':'arrow'}}"  bindtap='plan'>
+      <view class="content">
+        <text class="cuIcon-emojiflashfill text-pink"></text>
+        <text class="text-grey">{{buildingVo.buildingBaseInfo.buildingEmploy}}</text>
+      </view>
+      <view class="action">
+        <text class="text-grey text-sm">共1个方案</text>
+      </view>
+  </view>
+  <!-- 2.7 -->
+  <view class="cu-item {{menuArrow?'arrow':''}}">
+      <view class="content">
+        <text class="cuIcon-warn text-green"></text>
+        <text class="text-grey">详询市场对接</text>
+      </view>
+  </view>
+  <!-- 2.8 -->
+  <view class="cu-bar bg-white solid-bottom margin-top">
+    <view class="action">
+      <text class="cuIcon-title text-orange "></text> 分销规则
+    </view>
+  </view>
+  <!-- 2.9 -->
+<view id='tabs'>
+  <view class='tabs-box'>
+       <block wx:for="{{['热门楼盘','人气项目','超低价格','最新上线']}}" wx:key="index">
+      <view class="tabs-item {{currentTabIndex == index ? 'selected' : '' }}" bindtap='onTabsItemTap' data-index='{{index}}'>
+        {{item}}      
+      </view>
+    </block>
+  </view>
+  <!-- 选择对应页面 -->
+  <view class='ordert-detail'>
+    <view hidden='{{currentTabIndex != 0}}'>
+      <view class="rule">
+        <view class="rule-in">
+          <view class="rule-top">
+            <view>报备有效期：24小时</view>
+            <view>规则详情：提前一小时报备</view>
+          </view>
+          <view class="prompt">
+              注：第三方代理公司可能会对项目佣金及带看规则进行调整，请在报备客户时进行确认。
+          </view>
+        </view>
+      </view>
+    </view>
+    <view hidden='{{currentTabIndex != 1}}'>
+      <view class="rule">
+          <view class="rule-in">
+            <view class="rule-top">
+              <view>带看保护期：7天</view>
+              <view>规则详情：详询市场对接</view>
+            </view>
+            <view class="prompt">
+                注：第三方代理公司可能会对项目佣金及带看规则进行调整，请在报备客户时进行确认。
+            </view>
+          </view>
+        </view>
+    </view>
+    <view hidden='{{currentTabIndex != 2}}'>
+      <view class="rule">
+        <view class="rule-in">
+          <view class="rule-top">
+            <view>规则：详询市场对接</view>
+          </view>
+          <view class="prompt">
+              注：第三方代理公司可能会对项目佣金及带看规则进行调整，请在报备客户时进行确认。
+          </view>
+        </view>
+      </view>
+    </view>
+    <view hidden='{{currentTabIndex != 3}}'>
+     <view class="rule">
+        <view class="rule-in">
+          <view class="rule-top">
+            <view>合作期限：详询市场对接</view>
+          </view>
+          <view class="prompt">
+              注：第三方代理公司可能会对项目佣金及带看规则进行调整，请在报备客户时进行确认。
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 3.0 -->
+<view class="cu-bar bg-white solid-bottom margin-top">
+    <view class="action">
+      <text class="cuIcon-title text-orange "></text>市场专员
+    </view>
+  </view>
+ <view class="cu-item "wx:for="{{market}}" wx:key="{{key}}">
+      <view class="cu-avatar round lg" style="background-image:url({{item.user.avatarUrl}});">
+      </view>
+      <view class="content">
+        <view class="text-grey">
+          <text class="text-cut">{{item.user.nickname}}</text>
+          <view class="cu-tag round bg-orange sm">会员</view>
+        </view>
+        <view class="text-gray text-sm flex">
+          <text class="text-cut">{{tools.sub(item.assistantPhone, 3, 4)}}</text>
+        </view>
+      </view>
+      <view class="action">
+        <view class="action-in" bindtap='tel' data-phone='{{item.assistantPhone}}'> 
+          <image src="../../image/call.png" class="call-image"/>
+        </view>
+      </view>
+    </view>
+ <!-- 3.1 -->
+ <view class="solid-bottom margin-top cu-item {{menuArrow?'':'arrow'}}" bindtap='trendsDetail'>
+      <view class="content">
+        <text class="cuIcon-warn text-green"></text>
+        <text class="text-grey">最新动态</text>
+      </view>
+  </view>
+<!-- 3.2 -->
+<view class="cu-timeline" wx:for="{{trends}}" wx:key="{{key}}" >
+  <view class="cu-item text-blue" bindtap='trendsDetail'>
+    <view >
+      <view class="cu-list menu-avatar radius">
+        <view class="cu-item">
+          <view class="cu-avatar round lg" style="background-image:url({{item.user.avatarUrl}});"></view>
+          <view class="content">
+            <view class="text-grey">{{item.user.nickname}}</view>
+            <view class="text-gray text-sm">
+              <text class="cuIcon-infofill text-green"></text> {{item.commentContext}}</view>
+          </view>
+          <view class="action">
+            <view class="text-grey text-xs">{{item.createTime}}</view>
+            <!-- <view class="cu-tag round bg-red sm"> </view> -->
+          </view>
+        </view> 
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 3.3 -->
+<!-- <view class="padding">
+    <button class="cu-btn block bg-blue margin-tb-sm lg" catchtap='subscribeTo'>
+    订阅楼盘动态
+    </button>
+</view> -->
+<!-- 3.4 -->
+<view class="cu-item {{menuArrow?'arrow':''}} margin-top">
+      <view class="content">
+        <text class="cuIcon-btn text-green"></text>
+        <text class="text-grey">楼房买点</text>
+      </view>
+      <view class="action">
+        <button class="cu-btn round bg-green shadow" bindtap="copyBtn" disabled="{{copyData=='' ? true :false }}">
+          <text class="cuIcon-upload"></text> 复制</button>
+      </view>
+  </view>
+  <view class="information-fifth">
+  <view class="item">
+    <!-- <view class="item-title"> 项目介绍</view>
+    <view>千套小面积住宅即将闪亮登场，诚邀合作伙伴</view>
+    <view>项目地址：{{}}</view>
+    <view>占地面积：暂无消息</view>
+    <view>建筑面积：暂无消息</view>
+    <view>体量：暂无消息</view>
+    <view>面积段：暂无消息</view>
+    <view>均价：暂无消息</view>
+    <view>周边配套</view>
+    <view>【教育】 尽享周边的优质教育资源</view>
+    <view>【商业】 项目自建配套农贸市场（隔离对望）</view>
+    <view>【交通】 高速：啵啵啵啵啵啵</view>
+    <view>地铁：啵啵啵啵啵啵</view>
+    <view>铁路：啵啵啵啵啵啵</view>
+    <view>方便死</view> -->
+    <view class="item-title">春天阳光城</view>
+    <view class="item-in">千套小面积住宅即将闪亮登场，诚邀合作伙伴</view>
+    <view class="item-in">【户型面积】：86方</view>
+    <view class="item-in">【体量】：80套</view>
+    <view class="item-in">【具体层高】：约3.2米</view>
+    <view class="item-in">【户型面积】：暂无消息</view>
+    </view>
+</view>
+<view class="information-fifth-last" >
+  <view  class="item-last">
+    <view hidden="{{!selectedFlag}}">
+      <block wx:for="{{list01}}" wx:for-item="item" wx:for-index="index">
+        <view class="item-in">
+          <view >【{{item.title}}】：{{item.word}}</view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>
+<view class="padding">
+    <button class="cu-btn block bg-blue margin-tb-sm lg"  bindtap='changeToggle'>
+    展开更多
+    </button>
+</view>
+
+  
+    <!-- <view>千套小面积住宅即将闪亮登场，诚邀合作伙伴</view> -->
+    <!-- <view>{{buildingVo.buildingBaseInfo.buildingName}}</view>
+    <view>{{buildingVo.buildingBaseInfo.buildingGreen}}</view>
+    <view>{{buildingVo.buildingBaseInfo.propertyType}}</view>
+    <view>{{buildingVo.building.planningHousehold}}</view>
+    <view>{{buildingVo.building.buildingGroundArea}}</view>
+    <view>{{buildingVo.building.propertyCompany}}</view>
+    <view>{{buildingVo.building.propertyMoney}}</view>
+    <view>交房时间：{{buildingVo.building.commiteTime}}</view>
+    <view>详细地址：{{buildingVo.buildingBaseInfo.buildingAddress}}</view> -->
+    <!-- <view>方便死</view> -->
+ 
+  <!-- 3.5 -->
+ <view class="cu-bar bg-white solid-bottom margin-top">
+    <view class="action">
+      <text class="cuIcon-title text-orange "></text>主力户型
+    </view>
+  </view>
+  <scroll-view scroll-x class="scroll-header">
+      <view class="scroll-header-in" wx:for="{{brand}}"  wx:key="{{index}}">
+        <view class="scroll-header-all">
+            <view class="scroll-header-image">
+              <image src="{{item.url}}" data-index='{{index}}'bindtap='previewImg'></image>
+            </view>
+            <!-- <view class="scroll-header-title">{{item.title}}</view>
+            <view class="scroll-header-price">{{item.price}}</view> -->
+        </view>
+      </view>
+  </scroll-view>
+  <!-- 3.6 -->
+  <view class="margin-top cu-item {{menuArrow?'':'arrow'}}" bindtap='comments'>
+      <view class="content">
+        <text class="cuIcon-warn text-green"></text>
+        <text class="text-grey">网友点评</text>
+      </view>
+      <view class="action">
+        <text class="text-grey i">查看更多</text>
+      </view>
+  </view>
+  <!-- 点评 -->
+  <view wx:if="{{x==0}}">
+    <view class="ask-all">同行好友,专家将为您答疑解惑</view>
+    <view class="ask-go" bindtap='goAsk'>发布提问</view>
+  </view>
+  <view wx:else>
+  <view class="trends-all"wx:for="{{comment}}" wx:key="{{key}}">
+  <view class="trends" >
+    <view class="trends-left">
+      <image src="{{item.user.avatarUrl}}"/>
+    </view>
+    <view class="trends-right">
+      <view class="trends-right-name">
+         <text>{{item.user.nickname}}</text>
+         <image src="../../image/shou.png" class="action-image"/>
+      </view>
+      <view class="trends-right-content">
+        {{item.commentContext}}    
+      </view>
+      <view class="trends-right-time">
+        {{item.createTime}}
+        <view class="cu-tag round bg-olive light" bindtap='reply' data-id="{{item.commentId}}">回复</view>
+      </view>
+    </view>
+  </view>
+</view>
+</view>
+    <!-- 3.7 -->
+  <view class="padding">
+    <button class="cu-btn block bg-blue margin-tb-sm lg"  bindtap='goComments'>
+    我要点评
+    </button>
+</view>
+<!-- 3.8 -->
+  <view class="cu-item {{menuArrow?'':'arrow'}}" bindtap='ask'>
+      <view class="content">
+        <text class="cuIcon-warn text-green"></text>
+        <text class="text-grey">大家都在问</text>
+      </view>
+      <view class="action">
+        <text class="text-grey text-sm">查看更多</text>
+      </view>
+  </view>
+  <!-- 3.9 -->
+  <view wx:if="{{y==0}}">
+    <view class="ask-all">同行好友,专家将为您答疑解惑</view>
+    <view class="ask-go" bindtap='goAsk'>发布提问</view>
+  </view>
+  <view wx:else>
+   <view wx:for="{{askList}}" wx:key="{{key}}" >
+    <view class="ask-all-else" bindtap='toAsk' data-index='{{index}}'>
+      <view class="ask-in">
+        <view class="ask-top"> 
+          <view class="ask-top-to">
+              <text  class="ask-to" ><text class="ask">问</text> </text>
+              <text>{{item.commentContext}}</text>
+          </view>
+          <text class="anwser-to">{{item.countReply}}个回答</text>
+        </view>
+        <view class="ask-bottom"> 
+          <!-- <text  class="ask-to" ><text  class="anwser">答</text> </text>{{item.answer}} -->
+        </view>
+      </view>
+   </view>
+  </view>
+    <view class="padding">
+       <button class="cu-btn block bg-blue margin-tb-sm lg"  bindtap='goAsk'>我要提问</button>
+    </view>
+  </view>
+
+  <!-- 4.0 -->
+<view class="cu-item {{menuArrow?'':'arrow'}}">
+      <view class="content" bindtap='map'>
+        <text class="cuIcon-warn text-green"></text>
+        <text class="text-grey">周边配套</text>
+      </view>
+  </view>
+    <!-- 地图 -->
+<view class="page-body">
+<view class="page-section page-section-gap">
+    <map  bindtap='map'
+      id="myMap"
+      style="width: 100%; height: 170px;"
+      latitude="{{latitude}}"
+      longitude="{{longitude}}"
+      markers="{{markers}}"
+      covers="{{covers}}"
+      show-location
+    ></map>
+  </view>
+  </view>
+<!-- 4.1 -->
+<view class="cu-list grid col-{{gridCol}} {{gridBorder?'':'no-border'}}" bindtap='map'>
+    <view class="cu-item" wx:for="{{iconList}}" wx:key wx:if="{{index<gridCol*2}}">
+      <view class="cuIcon-{{item.icon}} text-{{item.color}}">
+      </view>
+      <text>{{item.name}}</text>
+    </view>
+  </view>
+<view class="cu-item {{menuArrow?'':'arrow'}}">
+      <view class="content">
+        <text class="cuIcon-warn text-green"></text>
+        <text class="text-grey">附近房子</text>
+      </view>
+  </view>
+  <view wx:for="{{list}}" wx:key="{{index}}">
+  <view class="cu-item"> 
+        <view class="list-all" bindtap='estateDetails'>
+          <view class="list-second">
+            <image src="{{item.imgArr}}"/>
+            <view class="list-right">
+                <view class="title-all">
+                  <view class="title">
+                    <text class="title-logn">在售</text> 
+                    <text class="title-title">{{item.buildingName}}</text>
+                  </view>
+                  <view class="collect">
+                      <image  catchtap='handleCollection' wx:if="{{!isCollected}}" src="../../image/shou.png"></image>
+                      <image catchtap='handleCollection' wx:if="{{isCollected}}" src="../../image/shou1.png"></image>
+                  </view>
+                </view>
+                <text class="list-right-text">{{item.show}} | {{item.city}}</text>
+                <view class="list-right-in">
+                  <view>{{item.countPrice}}万/套</view>
+                  <view>{{item.averagePrice}}万元/m<sup>2</sup></view>
+                </view>
+                <view class="list-right-last cu-tag round bg-olive light">住宅</view>
+            </view>
+          </view>
+        </view>
+        <!-- 代理 -->
+        <view class="agent-all">
+          <view class="agent">
+            <view class="agent-in">
+              <image style='height:20rpx;width:20rpx;' src='../../image/detail.png'></image>
+              <text>代理公司 | {{item.factory}}</text>
+            </view>
+           </view>
+        </view>
+         <view class="deline"></view>
+      </view>
+     </view>
+    
+    </view>
+    <view class="kong"></view>
+</scroll-view>
+
+<!-- 快速备案 -->
+ <view class="oblong-float">
+    <view class="share-all"bindtap="share"> <!--分享 -->
+        <view class="share">
+          <image src="../../image/share.png"></image>
+        </view>
+        <view class="share-text">
+          <text>分享</text>
+        </view>
+    </view>
+    <view class="oblong-float-in" bindtap="record">
+        <text class="invite">快速备案</text>
+    </view>
+  </view>
+  <!-- 分享 -->
+   <view class='imagePathBox' hidden="{{maskHiddens == false}}">
+       <view class="share-box"> 
+          <button class="wxshare-one"open-type="share">分享给经纪人</button>
+          <button class="wxshare" open-type='share' >分享给客户</button>
+          <button class="poster" bindtap="post" >分享到朋友圈</button>
+          <button class="cancel" bindtap='cancel'>取消</button>
+      </view>
+  </view>
+  <!-- 海报 -->
+  <view class='imagePathBox' hidden="{{mask == false}}">
+       <view class="share-boxs"> 
+          <button class="wxshare" bindtap='maSubmit' >生成二维码</button>
+          <button class="poster" bindtap='formSubmit' >生成海报</button>
+          <button class="cancel" bindtap='cancels'>取消</button>
+      </view>
+  </view>
+  <!-- 二维码 -->
+  <view class='imagePathBox' hidden="{{masks == false}}">
+      <image src="{{imagePath}}" class='shengchengs'></image>
+      <button class='baocun' bindtap='baocun01'>保存海报</button>
+  </view>
+  <view hidden="{{masks == false}}" class="mask"></view> 
+  <view class="canvas-box">
+      <canvas  style="width: 375px;height: 385px;position:fixed;top:9999px" canvas-id="canvas"/>
+  </view>  
+   <!-- 海报 -->
+  <view class='imagePathBox' hidden="{{maskHidden == false}}">
+      <image src="{{imagePath}}" class='shengcheng'></image>
+      <button class='baocun' bindtap='baocun'>保存海报</button>
+  </view>
+  <view hidden="{{maskHidden == false}}" class="mask"></view> 
+  <view class="canvas-box">
+      <canvas  style="width: 375px;height: 867px;position:fixed;top:9999px" canvas-id="mycanvas"/>
+  </view>  
+<!-- 手机号覆盖 -->
+<wxs src="../../utils/subutil.wxs" module="tools"></wxs>

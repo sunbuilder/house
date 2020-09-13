@@ -1,0 +1,45 @@
+<cu-custom bgColor="bg-gradual-green" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">咨询列表</view>
+</cu-custom>
+<!-- 搜索  -->
+    <view class="search">
+      <view class="search-in">
+         <image src="../../../image/search.png"></image>
+         <input class="input" placeholder="请输入姓名或电话号码"/>
+      </view>
+   </view>
+<!-- 判断--无数据 -->
+<view wx:if="{{diarylength==0}}">
+  <view class="container">
+      <image src="../../../image/00.jpg"> </image>
+      <text>还没有记录哦！</text>
+   </view>
+</view>
+<!-- 判断--有数据 -->
+<view wx:else>
+<view wx:for="{{list}}" wx:key="{{index}}" class="list-all">
+  <view class="list">
+    <view class="list-first">
+        <view class="list-first-left">{{item.name}}  <text class="list-phone">{{item.phone}}</text></view>
+        <!-- <view class="list-first-right"></view> -->
+    </view>
+    <view class="list-second">
+     <text>所属公司：</text>
+      <!-- <image src="../../../image/watch.png"/> -->
+      <text>{{item.plate}}</text>
+    </view>
+    <view class="list-third">
+       <text>咨询项目：</text>
+      <text>{{item.content}}</text>
+      </view>
+    <view class="list-fourth">
+        <view class="list-fourth-left">
+        <text class="list-record">无举报记录  </text>
+        <text>{{item.time}}</text>
+        </view>
+        <view class="list-fourth-right" bindtap="report">我要举报</view>
+    </view>
+  </view>
+</view>
+</view>

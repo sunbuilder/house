@@ -1,0 +1,92 @@
+<cu-custom bgColor="bg-gradual-orange" isBack="{{true}}"><view slot="backText">返回</view><view slot="content">我的邀请</view></cu-custom>
+<!-- 选择 -->
+<view id='tabs'>
+  <view class='tabs-box'>
+    <block wx:for="{{['我的充值','我的邀请']}}" wx:key="index">
+      <view class="tabs-item {{currentTabIndex == index ? 'selected' : '' }}" bindtap='onTabsItemTap' data-index='{{index}}'>
+        {{item}}      
+      </view>
+    </block>
+  </view>
+<!-- 选择对应页面 -->
+  <view class='ordert-detail'>
+    <view hidden='{{currentTabIndex != 0}}'>
+      <view wx:if="{{diarylength==0}}">
+        <view class="container">
+          <image src="../../../image/00.jpg"> </image>
+          <text>还没有记录哦！</text>
+        </view>
+      </view>
+      <!-- 判断--有权限 -->
+    <view wx:else>
+    <view class="cu-list menu-avatar">
+        <view class="margin-top cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" wx:for="{{list}}" wx:key bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}">
+          <view class="cu-avatar radius lg" >
+              <image src="../../../image/vip.png"class="img"></image>
+          </view>
+          <view class="content">
+            <view class="text-grey">{{item.title}}</view>
+            <view class="text-gray text-sm">
+              <text class="cuIcon-infofill text-red"></text>{{item.time}}
+            </view>
+          </view>
+          <view class="action">
+            <text class="money">{{item.money}}</text>元
+          </view>
+          <view class="move">
+            <view class="bg-blue" bindtap = "revise">修改</view>
+            <view class="bg-red" bindtap = "delItem">删除</view>
+          </view>
+        </view>
+      </view>
+      </view>
+    </view>
+    <view hidden='{{currentTabIndex != 1}}'>
+       <view wx:if="{{diarylengths==0}}">
+        <view class="container">
+          <image src="../../../image/00.jpg"> </image>
+          <text>还没有记录哦！</text>
+        </view>
+      </view>
+      <!-- 判断--有权限 -->
+    <view wx:else>
+    <view class="cu-list menu-avatar">
+      <view class="margin-top cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" wx:for="{{inviteList}}" wx:key bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}">
+          <view class="cu-avatar radius lg" >
+              <image src="{{item.img}}"class="img"></image>
+          </view>
+          <view class="content "id="">
+            <view class="text-grey">{{tools.sub(item.phone, 3, 4)}}</view>
+            <view class="text-gray text-sm">
+              <text class="cuIcon-infofill text-blue"></text>充值成功
+              <text class="text-grey text-sm">{{item.name}}</text>
+            </view>
+          </view>
+          <view class="action">
+            <view >送<text  class="time">{{item.time}}</text>月</view>
+          </view>
+          <view class="move">
+            <view class="bg-blue" bindtap = "revise">修改</view>
+            <view class="bg-red" bindtap = "delItem">删除</view>
+          </view>
+        </view>
+      </view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 返回首页 -->
+<navigator url="../../index/index">
+    <view class="circle-float">
+      <image src="../../../image/write.png"/>
+    </view>
+</navigator>
+<!-- 邀请好友 -->
+<navigator url="../invite/share/share">
+  <view class="oblong-float">
+      <text class="invite">立即邀请</text>
+  </view>
+ </navigator>
+
+
+<wxs src="../../../utils/subutil.wxs" module="tools"></wxs>

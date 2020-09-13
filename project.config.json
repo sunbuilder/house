@@ -1,0 +1,157 @@
+{
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"coverView": true,
+		"autoAudits": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.9.4",
+	"appid": "wx999e470ac4dfc5d4",
+	"projectname": "ColorUI-template",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": [
+				{
+					"id": -1,
+					"name": "pages/release/release",
+					"pathName": "pages/release/release",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/logs/invite/share/share",
+					"pathName": "pages/logs/invite/share/share",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/logs/invite/invite",
+					"pathName": "pages/logs/invite/invite",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 3,
+					"name": "pages/estateDetails/goComments/goComments",
+					"pathName": "pages/estateDetails/goComments/goComments",
+					"query": "buildingId= 1578318835683815114",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/logs/vip/vip",
+					"pathName": "pages/logs/vip/vip",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/logs/collect/collect",
+					"pathName": "pages/logs/collect/collect",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/home",
+					"pathName": "pages/home/home",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 7,
+					"name": "pages/estateDetails/estateDetails",
+					"pathName": "pages/estateDetails/estateDetails",
+					"query": "id=1578318835683815114",
+					"scene": null
+				},
+				{
+					"id": 8,
+					"name": "pages/estateDetails/estateDetails",
+					"pathName": "pages/estateDetails/estateDetails",
+					"query": "id=1578410560211412931",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/estateDetails/plan/plan",
+					"pathName": "pages/estateDetails/plan/plan",
+					"query": "id= 1578318835683815114",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/estateDetails/parameter/parameter",
+					"pathName": "pages/estateDetails/parameter/parameter",
+					"query": "id=1578410560211412931",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/estateDetails/goComments/goComments",
+					"pathName": "pages/estateDetails/goComments/goComments",
+					"query": "id= 1578318835683815114",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/estateDetails/goAsk/goAsk",
+					"pathName": "pages/estateDetails/goAsk/goAsk",
+					"query": "buildingId=1578318835683815114&buildingName=11",
+					"scene": null
+				},
+				{
+					"id": 13,
+					"name": "pages/estateDetails/parameter/parameter",
+					"pathName": "pages/estateDetails/parameter/parameter",
+					"query": "id=1578318835683815114",
+					"scene": null
+				}
+			]
+		}
+	}
+}

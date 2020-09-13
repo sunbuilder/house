@@ -1,0 +1,61 @@
+<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+    <view slot="backText">返回</view>
+    <view slot="content">收藏</view>
+</cu-custom>
+<!-- 搜索 -->
+<navigator url="../../search/search">
+  <view class="search">
+    <view class="search-in">
+      <image src="../../../image/search.png"></image>
+      <text>请输入项目名称或公司名</text>
+    </view>
+  </view>
+</navigator>
+<!-- 收藏列表 -->
+<!-- 判断--无数据 -->
+<view wx:if="{{diarylength==0}}">
+  <view class="container">
+      <image src="../../../image/00.jpg"> </image>
+      <text>还没有记录哦！</text>
+   </view>
+</view>
+<!-- 判断--有数据 -->
+<view wx:else>
+  <view wx:for="{{list}}" wx:key="{{index}}">
+  <view class="cu-item"> 
+        <view class="list-all" bindtap='estateDetails'>
+          <view class="list-second">
+            <image src="{{item.imgArr}}"/>
+            <view class="list-right">
+                <view class="title-all">
+                  <view class="title">
+                    <text class="title-logn">在售</text> 
+                    <text class="title-title">{{item.buildingName}}</text>
+                  </view>
+                  <view class="collect">
+                      <image  catchtap='handleCollection' wx:if="{{!isCollected}}" src="../../../image/shou.png"></image>
+                      <image catchtap='handleCollection' wx:if="{{isCollected}}" src="../../../image/shou1.png"></image>
+                  </view>
+                </view>
+                <text class="list-right-text">{{item.show}} | {{item.city}}</text>
+                <view class="list-right-in">
+                  <view>{{item.countPrice}}万/套</view>
+                  <view>{{item.averagePrice}}万元/m<sup>2</sup></view>
+                </view>
+                <view class="list-right-last cu-tag round bg-olive light">住宅</view>
+            </view>
+          </view>
+        </view>
+        <!-- 代理 -->
+        <view class="agent-all">
+          <view class="agent">
+            <view class="agent-in">
+              <image style='height:20rpx;width:20rpx;' src='../../../image/detail.png'></image>
+              <text>代理公司 | {{item.factory}}</text>
+            </view>
+           </view>
+        </view>
+         <view class="deline"></view>
+      </view>
+     </view>
+  </view>

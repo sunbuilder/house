@@ -1,0 +1,33 @@
+/* pages/credit/report/report.wxss */
+page{
+ background-color:white;
+}
+
+.report-all{
+  background:white;
+  height:500px;
+  width:100%;
+}
+.report-in{
+  height:33%;
+  width:100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.report-left{
+  height:100%;
+  width:50%;
+}
+.report-right{
+  height:100%;
+  width:50%;
+}
+.report-left image{
+  height:100%;
+  width:100%;
+}
+.report-right image{
+  height:100%;
+  width:100%;
+}

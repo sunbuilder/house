@@ -1,0 +1,66 @@
+/* pages/logs/wallet/wallet.wxss */
+page{
+ background-color:#F6F6F6;
+}
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+} 
+.wallet{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wallet-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  /* border-radius: 50%; */
+}
+
+.wallet-nickname {
+  color:black;
+  font-size:40px;
+}
+
+.prompt {
+  margin-top: 200px;
+}
+.detail{
+  color:blue;
+}
+/* 提现 */
+.oblong-float{
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 0rpx;
+  width:100%;
+  height: 100rpx;
+  font-size: 28rpx;
+  background-color: white;
+  z-index: 9999;
+  border-radius:10px;
+}
+.oblong-float-in{
+  color: #ffffff;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width:90%;
+  height: 90rpx;
+  font-size: 28rpx;
+  background-color: #DD0791;
+   border-radius:10px;
+}
+.invite{
+  font-size:20px;
+}

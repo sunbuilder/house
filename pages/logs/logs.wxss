@@ -1,0 +1,129 @@
+.UCenter-bg {
+  background-image: url(https://image.weilanwl.com/color2.0/index.jpg);
+  background-size: cover;
+  height: 450rpx;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  /* padding-top: 40rpx;
+  overflow: hidden;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+  font-weight: 300;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.3); */
+}
+
+.UCenter-bg text {
+  opacity: 0.8;
+}
+
+.UCenter-bg image {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.UCenter-bg .gif-wave{
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+  mix-blend-mode: screen;  
+  height: 100rpx;   
+}
+
+map,.mapBox{
+  left: 0;
+  z-index: 99;
+  mix-blend-mode: screen;  
+  height: 100rpx;   
+}
+
+map,.mapBox{
+  width: 750rpx;
+  height: 300rpx;
+}
+
+/* 头像 */
+/* .userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+} */
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+}
+.img{
+  height:3px;
+  width:3px;
+}
+.getCodeView {
+width: 100px;
+margin-left: 0rpx;
+height: 60rpx;
+line-height: 60rpx;
+background: #fff;
+padding-left:0rpx;
+border:none;
+font-size:30rpx;
+}
+button::after {
+ border: none;
+}
+
+#btn{
+  display:flex;
+  align-items:center;
+}
+.cuIcon-creativefill{
+  z-index:999;
+}
+.userinfo{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  height:300rpx;
+  width:90%;
+}
+.userinfo-left{
+  height:150rpx;
+  width:30%;
+}
+.userinfo-medile{
+  height:100rpx;
+  width:55%;
+}
+.userinfo-right{
+  height:100rpx;
+  width:15%;
+}
+.userinfo-name{
+  color:#fff;
+  font-size:35rpx;
+  font-weight:700;
+}
+.userinfo-left-in{
+  height:15px;
+  width:60px;
+  border-radius:15px;
+  background:#CCE9BB;
+  font-size:20rpx;
+  color:#84C440;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  position:relative;
+  top:-17px;
+
+}

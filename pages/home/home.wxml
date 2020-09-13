@@ -1,0 +1,316 @@
+<cu-custom bgColor="bg-gradual-blue">
+  <view slot="content">新房</view>
+</cu-custom>
+<!-- 搜索 -->
+<navigator url="../search/search">
+  <view class="search">
+    <view class="search-in">
+      <image src="../../image/search.png"></image>
+      <text>请输入项目名称或公司名{{id}}</text>
+    </view>
+  </view>
+</navigator>
+<!-- 筛选 -->
+<view class="list">
+   <picker mode="multiSelector" bindchange="MultiChange" bindcolumnchange="MultiColumnChange" value="{{multiIndex}}"
+		 range="{{multiArray}}">
+        <text wx:if="{{ haiwai==3 }}">海外</text>
+        <text wx:else>{{multiArray[2][multiIndex[2]]}}</text>
+        <image class="img-down" src='../../image/down1.png'></image>
+    </picker>
+    <picker bindchange="PickerChange" value="{{index}}" range="{{picker}}">
+        <text>{{index?picker[index]:'均价'}}</text>
+        <image class="img-down" src='../../image/down1.png'></image>
+    </picker>
+    	<picker bindchange="PickerChangeOne" value="{{indexOne}}" range="{{pickerOne}}">
+        <text>{{indexOne?pickerOne[indexOne]:'首付'}}</text>
+        <image class="img-down" src='../../image/down1.png'></image>
+    </picker>
+    <picker bindchange="PickerChangeTwo" value="{{indexTwo}}" range="{{pickerTwo}}">
+        <text>{{indexTwo?pickerTwo[indexTwo]:'筛选'}}</text>
+        <image class="img-down" src='../../image/down1.png'></image>
+    </picker>
+    <picker bindchange="PickerChangeThree" value="{{indexThree}}" range="{{pickerThree}}">
+      <image style='height:25rpx;width:25rpx;' src='../../image/paixu.png'></image>
+    </picker>
+</view>
+    
+<!-- 下拉需要显示的列表 -->
+<!-- <view class="select">
+    <view class="select_box" wx:if="{{select}}">
+      <view>ceshi</view>
+    </view>
+</view> -->
+<!-- 选择 -->
+<view id='tabs'>
+  <!-- <view class='tabs-box'>
+    <block wx:for="{{['全部','诚信联盟','恒房通','凤凰通','万科家','融创通','福利好房']}}" wx:key="index">
+      <view class="tabs-item {{currentTabIndex == index ? 'selected' : '' }}" bindtap='onTabsItemTap' data-index='{{index}}'>
+        {{item}}      
+      </view>
+    </block>
+  </view> -->
+    <view class='tabs-box'>
+    <!-- <scroll-view scroll-x class="scroll-header"> -->
+   <view class="tabs-item {{currentTabIndex == index ? 'selected' : '' }}" bindtap='onTabsItemTap' data-index='{{index}}'wx:for="{{btns}}" wx:key="index">
+    {{item.title}}
+   </view>
+    <!-- </scroll-view> -->
+ </view>
+
+<!-- 选择对应页面 -->
+  <view class='ordert-detail'>
+    <view hidden='{{currentTabIndex != 0}}'>
+    <view wx:for="{{list}}" wx:key="{{index}}" wx:for-index="id" >
+        <view class="list-all" bindtap='estateDetails' data-id='{{item.buildingId}}'>
+          <view class="list-second">
+            <image src="{{item.images[0].url}}"/>
+            <view class="list-right">
+                <view class="title-all"> 
+                  <view class="title">
+                    <text class="title-logn">在售</text> 
+                    <text class="title-title">{{item.buildingName}}</text>
+                   </view>
+                  <view class="collect">
+                      <image  catchtap='handleCollection' wx:if="{{item.collect}}" data-index="{{id}}" src="../../image/shou1.png"></image>
+                      <image catchtap='handleCollection' wx:if="{{!item.collect}}" src="../../image/shou.png"  data-index="{{id}}"></image>
+                  </view>
+                </view>
+                <text class="list-right-text">{{item.isShow}} | {{item.buildingAddress}}</text>
+                <view class="list-right-in">
+                  <view wx:if="{{item.averagePrice==null }}">
+                   <view>总价：待定</view>
+                  </view>
+                  <view wx:elif="{{item.averagePrice!= null }}">
+                    <view>{{item.averagePrice}}万/套</view>
+                  </view>
+                  <view wx:if="{{item.countPrice==null }}">
+                   <view>均价：待定</view>
+                  </view>
+                  <view wx:elif="{{item.countPrice!=null}}">
+                    <view>{{item.countPrice}}万元/m<sup>2</sup></view>
+                  </view>
+                </view>
+                <view wx:if="{{item.buildingSign== '' }}">
+                  <view class="list-right-last">
+                    <view class="cu-tag round bg-olive light">暂无</view>
+                  </view>
+                </view>
+                <view wx:elif="{{item.buildingSign!=''}}">
+                  <view class="list-right-last">
+                    <view class="cu-tag round bg-olive light">{{item.buildingSign}}</view>
+                    <!-- <view class="list-right-last cu-tag round bg-olive light">{{item.buildingSign}}</view> -->
+                  </view>
+                </view>
+               
+            </view>
+          </view>
+        </view>
+        <!-- 代理 -->
+        <!-- <view class="agent-all">
+          <view class="agent">
+          <image style='height:20rpx;width:20rpx;' src='../../image/down.png'></image>
+          <text>代理公司 | {{item.factory}}</text>
+          </view>
+        </view> -->
+      </view>
+    </view>
+
+
+
+    <view hidden='{{currentTabIndex != 1}}'>
+    <view wx:for="{{list1}}" wx:key="{{index}}">
+        <view class="list-all" bindtap='estateDetails' >
+          <view class="list-second">
+            <image src="{{item.images[0].url}}"/>
+            <view class="list-right">
+                <view class="title-all">
+                  
+                  <view class="title"><text class="title-logn">在售</text> {{item.title}}</view>
+                  <view class="collect">
+                      <image  catchtap='handleCollection' wx:if="{{!isCollected}}" src="../../image/shou.png"></image>
+                      <image catchtap='handleCollection' wx:if="{{isCollected}}" src="../../image/shou1.png"></image>
+                  </view>
+                </view>
+                <text class="list-right-text">{{item.show}} | {{item.city}}</text>
+                <view class="list-right-in">
+                  <view>{{item.money1}}万/套</view>
+                  <view>{{item.money2}}万元/m<sup>2</sup></view>
+                </view>
+                <view class="list-right-last cu-tag round bg-olive light">住宅</view>
+            </view>
+          </view>
+        </view>
+        <!-- 代理 -->
+        <view class="agent-all">
+          <view class="agent">
+          <image style='height:20rpx;width:20rpx;' src='../../image/down.png'></image>
+          <text>代理公司 | {{item.factory}}</text>
+          </view>
+        </view>
+      </view>
+      </view>
+    <view hidden='{{currentTabIndex != 2}}'>
+    <view wx:for="{{list2}}" wx:key="{{index}}">
+        <view class="list-all" bindtap='estateDetails'>
+          <view class="list-second">
+            <image src="{{item.images[0].url}}"/>
+            <view class="list-right">
+                <view class="title-all">
+                  <view class="title"><text class="title-logn">在售</text> {{item.title}}</view>
+                  <view class="collect">
+                      <image  catchtap='handleCollection' wx:if="{{!isCollected}}" src="../../image/shou.png"></image>
+                      <image catchtap='handleCollection' wx:if="{{isCollected}}" src="../../image/shou1.png"></image>
+                  </view>
+                </view>
+                <text class="list-right-text">{{item.show}} | {{item.city}}</text>
+                <view class="list-right-in">
+                  <view>{{item.money1}}万/套</view>
+                  <view>{{item.money2}}万元/m<sup>2</sup></view>
+                </view>
+                <view class="list-right-last cu-tag round bg-olive light">住宅</view>
+            </view>
+          </view>
+        </view>
+        <!-- 代理 -->
+        <view class="agent-all">
+          <view class="agent">
+          <image style='height:20rpx;width:20rpx;' src='../../image/down.png'></image>
+          <text>代理公司 | {{item.factory}}</text>
+          </view>
+        </view>
+      </view>
+      </view>
+    <view hidden='{{currentTabIndex != 3}}'>
+    <view wx:for="{{list3}}" wx:key="{{index}}">
+        <view class="list-all" bindtap='estateDetails'>
+          <view class="list-second">
+            <image src="{{item.images[0].url}}"/>
+            <view class="list-right">
+                <view class="title-all">
+                  
+                  <view class="title"><text class="title-logn">在售</text> {{item.title}}</view>
+                  <view class="collect">
+                      <image  catchtap='handleCollection' wx:if="{{!isCollected}}" src="../../image/shou.png"></image>
+                      <image catchtap='handleCollection' wx:if="{{isCollected}}" src="../../image/shou1.png"></image>
+                  </view>
+                </view>
+                <text class="list-right-text">{{item.show}} | {{item.city}}</text>
+                <view class="list-right-in">
+                  <view>{{item.money1}}万/套</view>
+                  <view>{{item.money2}}万元/m<sup>2</sup></view>
+                </view>
+                <view class="list-right-last cu-tag round bg-olive light">住宅</view>
+            </view>
+          </view>
+        </view>
+        <!-- 代理 -->
+        <view class="agent-all">
+          <view class="agent">
+          <image style='height:20rpx;width:20rpx;' src='../../image/down.png'></image>
+          <text>代理公司 | {{item.factory}}</text>
+          </view>
+        </view>
+      </view>
+      </view>
+    <view hidden='{{currentTabIndex != 4}}'>
+    <view wx:for="{{list4}}" wx:key="{{index}}">
+        <view class="list-all" bindtap='estateDetails'>
+          <view class="list-second">
+            <image src="{{item.images[0].url}}"/>
+            <view class="list-right">
+                <view class="title-all">
+                  
+                  <view class="title"><text class="title-logn">在售</text> {{item.title}}</view>
+                  <view class="collect">
+                      <image  catchtap='handleCollection' wx:if="{{!isCollected}}" src="../../image/shou.png"></image>
+                      <image catchtap='handleCollection' wx:if="{{isCollected}}" src="../../image/shou1.png"></image>
+                  </view>
+                </view>
+                <text class="list-right-text">{{item.show}} | {{item.city}}</text>
+                <view class="list-right-in">
+                  <view>{{item.money1}}万/套</view>
+                  <view>{{item.money2}}万元/m<sup>2</sup></view>
+                </view>
+                <view class="list-right-last cu-tag round bg-olive light">住宅</view>
+            </view>
+          </view>
+        </view>
+        <!-- 代理 -->
+        <view class="agent-all">
+          <view class="agent">
+          <image style='height:20rpx;width:20rpx;' src='../../image/down.png'></image>
+          <text>代理公司 | {{item.factory}}</text>
+          </view>
+        </view>
+      </view>
+      </view>
+    <view hidden='{{currentTabIndex != 5}}'>
+    <view wx:for="{{list5}}" wx:key="{{index}}">
+        <view class="list-all" bindtap='estateDetails'>
+          <view class="list-second">
+            <image src="{{item.imgArr}}"/>
+            <view class="list-right">
+                <view class="title-all">
+                  <view class="title"><text class="title-logn">在售</text> {{item.title}}</view>
+                  <view class="collect">
+                      <image  catchtap='handleCollection' wx:if="{{!isCollected}}" src="../../image/shou.png"></image>
+                      <image catchtap='handleCollection' wx:if="{{isCollected}}" src="../../image/shou1.png"></image>
+                  </view>
+                </view>
+                <text class="list-right-text">{{item.show}} | {{item.city}}</text>
+                <view class="list-right-in">
+                  <view>{{item.money1}}万/套</view>
+                  <view>{{item.money2}}万元/m<sup>2</sup></view>
+                </view>
+                <view class="list-right-last cu-tag round bg-olive light">住宅</view>
+            </view>
+          </view>
+        </view>
+        <!-- 代理 -->
+        <view class="agent-all">
+          <view class="agent">
+          <image style='height:20rpx;width:20rpx;' src='../../image/down.png'></image>
+          <text>代理公司 | {{item.factory}}</text>
+          </view>
+        </view>
+      </view>
+      </view>
+    <view hidden='{{currentTabIndex != 6}}'>
+    <view wx:for="{{list6}}" wx:key="{{index}}">
+        <view class="list-all" bindtap='estateDetails'>
+          <view class="list-second">
+            <image src="{{item.imgArr}}"/>
+            <view class="list-right">
+                <view class="title-all">
+                  
+                  <view class="title"><text class="title-logn">在售</text> {{item.title}}</view>
+                  <view class="collect">
+                      <image  catchtap='handleCollection' wx:if="{{!isCollected}}" src="../../image/shou.png"></image>
+                      <image catchtap='handleCollection' wx:if="{{isCollected}}" src="../../image/shou1.png"></image>
+                  </view>
+                </view>
+                <text class="list-right-text">{{item.show}} | {{item.city}}</text>
+                <view class="list-right-in">
+                  <view>{{item.money1}}万/套</view>
+                  <view>{{item.money2}}万元/m<sup>2</sup></view>
+                </view>
+                <view class="list-right-last cu-tag round bg-olive light">住宅</view>
+            </view>
+          </view>
+        </view>
+        <!-- 代理 -->
+        <view class="agent-all">
+          <view class="agent">
+          <image style='height:20rpx;width:20rpx;' src='../../image/down.png'></image>
+          <text>代理公司 | {{item.factory}}</text>
+          </view>
+        </view>
+      </view>
+      </view>
+  </view>
+</view>
+
+
+<!-- 弹框 -->
+<!-- <include src="../../wxPop/wxPop.wxml" /> -->

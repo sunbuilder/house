@@ -1,0 +1,54 @@
+.cu-form-group .title {
+  min-width: calc(4em + 30rpx);
+}
+/* 按钮 */
+.btn {
+  width: 80%;
+  margin-top: 20rpx;
+  background: yellow;
+  color: white;
+  border-radius: 98rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.btnImg {
+  margin-right: 8rpx;
+  width: 46rpx;
+  height: 46rpx;
+}
+
+.btn::after {
+  border-radius: 98rpx;
+  border: 0; 
+}
+.must{
+  color:red;
+}
+
+.ff_anniu
+{
+width:100%;
+display: flex;
+flex-flow: row wrap;
+align-content: space-around;
+background-color: white;
+}
+
+.ff_item{
+box-sizing: border-box;
+flex: 0 0 33.3333333333%;
+font-size: 30rpx;
+color: #535353;
+background-color: white;
+padding: 20rpx;
+text-align: left;
+display: block;
+}
+/* 平方 */
+sup{
+     font-size: 7px;
+     vertical-align:text-top;
+}
